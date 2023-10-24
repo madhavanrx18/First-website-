@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="mainstyle.css">
+</head>
+<body id="login">
+    <nav>
+        <label class="logo">Amrita Cybernation</label>
+        <ul>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="calc.html">Calculator</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="form.html">Register</a></li>
+        </ul>
+    </nav>
+    
+   
+    
+        <div class="login-container1">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" placeholder="Username" name="username" required>
+                <div > <!-- Adjusted margin-bottom to reduce space -->
+                    <input type="password" id="password" placeholder="Password" name="password" required>
+                    <input type="checkbox" onclick="togglePassword()"> Show Password
+                </div>
+                <p id="captcha" style="font-size: 20px; font-weight: bold; margin: 0px; margin-bottom: 5px;"></p>
+                <input type="text" id="userCaptcha" placeholder="Enter the captcha" required><br>
+                <button type="submit" id="loginButton">Login</button>
+            </form>
+        </div>
+    
+        <form class="hidden-form" id="hiddenForm">
+            <input type="text" name="hiddenField" id="hiddenField" placeholder="Hidden Field">
+        </form>
+    </body>
+    
+    <script>
+         function togglePassword() {
+        var passwordInput = document.getElementById('password');
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+        function generateCaptcha() {
+            var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var captchaLength = 6;
+            var captcha = '';
+            for (var i = 0; i < captchaLength; i++) {
+                var randomIndex = Math.floor(Math.random() * chars.length);
+                captcha += chars[randomIndex];
+            }
+            return captcha;
+        }
+
+        var captchaText = generateCaptcha();
+        var captchaElement = document.getElementById('captcha');
+        captchaElement.textContent = captchaText;
+
+       
+
+        document.getElementById('hiddenForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var isFilled = false;
+            var inputs = document.querySelectorAll('.hidden-form input');
+            inputs.forEach(function(input) {
+                if (input.value.trim() !== '') {
+                    isFilled = true;
+                }
+            });
+            if (isFilled) {
+                alert('You are a robot');
+            }
+        });
+
+        document.getElementById('loginButton').addEventListener('click', function (e) {
+            e.preventDefault();
+            var userCaptcha = document.getElementById('userCaptcha').value;
+            if (userCaptcha === captchaText) {
+                alert('Login Successful');
+            } else {
+                alert('Invalid CAPTCHA. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

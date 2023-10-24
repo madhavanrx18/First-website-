@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CGPA Calculator</title>
+    <link rel="stylesheet" href="mainstyle.css">
+</head>
+<body id="calcu">
+    <nav>
+        <label class="logo">Amrita Cybernation</label>
+        <ul>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="calc.html">Calculator</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="form.html">Register</a></li>
+        </ul>
+    </nav>
+    <div class="coontainer">
+    <h2 class="content">CGPA Calculator</h2>
+
+    <p>Welcome to the CGPA Calculator! Please fill in the details for each course, including the course code, course name, credits, and the corresponding grade. Upon entering the required information, click the "Calculate CGPA" button to generate your CGPA based on the provided data. You can reset the form at any time by clicking the "Reset" button. Enjoy calculating your CGPA!</p>
+
+    <h3>Grade Points Mapping</h3>
+    <table border="1">
+        <tr>
+            <th>Grade</th>
+            <th>Grade Points</th>
+        </tr>
+        <tr>
+            <td>O</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>A+</td>
+            <td>9.5</td>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>B+</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>P</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>F</td>
+            <td>0</td>
+        </tr>
+    </table>
+
+
+    <form id="cgpaForm">
+        <table class="custom-table" border='1'>
+            <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th></th>
+            </tr>
+            <tbody id="coursesTableBody">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <p class="paragraph" id="totalGradePoints"></p>
+        <p class="paragraph" id="totalCredits"></p>
+        <p class="paragraph" id="sgpa"></p>
+        <button type="submit" class="button1" id="calculateButton">Calculate CGPA</button>
+    </form>
+</div>
+
+    <script>
+        var numCourses = parseInt(prompt("Enter the number of courses:"));
+
+        var tableBody = document.getElementById('coursesTableBody');
+
+        // Define the grade points mapping
+        var gradePointsMap = {
+            'O': 10,
+            'A+': 9.5,
+            'A': 9,
+            'B+': 8,
+            'B': 7,
+            'C': 6,
+            'P': 5,
+            'F': 0,
+        };
+
+        // Dynamically create rows for the table
+        for (var i = 1; i <= numCourses; i++) {
+            var row = document.createElement('tr');
+            var courseCode = "courseCode" + i;
+            var courseName = "courseName" + i;
+            var credits = "credits" + i;
+            var grade = "grade" + i;
+
+            row.innerHTML = `
+                <td><input type="text" class="input-field" name="${courseCode}" placeholder="Course Code"></td>
+                <td><input type="text" class="input-field" name="${courseName}" placeholder="Course Name"></td>
+                <td><input type="number" class="input-field" name="${credits}" placeholder="Credits"></td>
+                <td><input type="text" class="input-field" name="${grade}" placeholder="Grade"></td>
+                <td></td>
+            `;
+            tableBody.appendChild(row);
+            if (i === 1) {
+                var headerRow = document.querySelector('.custom-table tr');
+                var gradePointsHeader = document.createElement('th');
+                gradePointsHeader.textContent = 'Grade Points';
+                headerRow.appendChild(gradePointsHeader);
+            }
+        }
+
+        // Submit event listener for the form
+        document.getElementById('cgpaForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Perform your CGPA calculation here
+            var tableRows = document.querySelectorAll('#coursesTableBody tr');
+            var totalGradePoints = 0;
+            var totalCredits = 0;
+
+            for (var j = 0; j < tableRows.length; j++) {
+                var creditsValue = parseFloat(tableRows[j].querySelector('input[name^="credits"]').value);
+                var gradeValue = tableRows[j].querySelector('input[name^="grade"]').value.trim().toUpperCase();
+                var gradePointsValue = gradePointsMap[gradeValue] * creditsValue;
+
+                var gradePointsCell = document.createElement('td');
+                gradePointsCell.textContent = gradePointsValue;
+                tableRows[j].appendChild(gradePointsCell);
+
+                totalGradePoints += gradePointsValue;
+                totalCredits += creditsValue;
+            }
+
+            // Calculate SGPA
+            var sgpa = totalGradePoints / totalCredits;
+
+            // Display the total grade points, total credits, and SGPA
+            var totalGradePointsElement = document.getElementById('totalGradePoints');
+            totalGradePointsElement.textContent = "Total Grade Points: " + totalGradePoints;
+
+            var totalCreditsElement = document.getElementById('totalCredits');
+            totalCreditsElement.textContent = "Total Credits: " + totalCredits;
+
+            var sgpaElement = document.getElementById('sgpa');
+            sgpaElement.textContent = "SGPA: " + sgpa.toFixed(2);
+
+            // Replace the button with the reset button
+            var calculateButton = document.getElementById('calculateButton');
+            calculateButton.parentNode.removeChild(calculateButton);
+
+            var resetButton = document.createElement('button');
+            resetButton.textContent = "Reset";
+            resetButton.setAttribute('type', 'reset');
+            resetButton.setAttribute('id', 'resetButton');
+            document.getElementById('cgpaForm').appendChild(resetButton);
+        });
+
+        // Reset event listener for the form
+        document.getElementById('cgpaForm').addEventListener('reset', function () {
+            location.reload();
+        });
+    </script>
+</body>
+</html>

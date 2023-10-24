@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="mainstyle.css">
+</head>
+<body id="abt">
+    <nav>
+        <label class="logo">Amrita Cybernation</label>
+        <ul>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="calc.html">Calculator</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="form.html">Register</a></li>
+        </ul>
+    </nav>
+<div class="containera">
+    <h2>About Page</h2>
+    <p style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: large;">This is the about page for our website. It provides information about our organization and our mission.</p>
+    <p style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: large;">Feel free to interact with the content using the buttons below to trigger specific mouse events.</p>
+    <div class="event-buttons">
+        <button onclick="showMouseUp()">Mouseup to know about AMMA</button>
+        <button onmousedown="showMouseDown()">Mouse Down to know about Chennai campus</button>
+        <button onclick="showClick()">Click to know about AOC</button>
+        <button ondblclick="showDoubleClick()">Doubleclick to know about CyberNation</button>
+    </div>
+    <div class="event-info">
+        <p id="eventMessage"></p>
+        <img src="" id="image" style="width: 100%; margin-top: 20px; height: auto; display: none;">
+    </div>
+</div>
+
+    <script>
+        function showMouseUp() {
+            document.getElementById('eventMessage').textContent = 'A renowned humanitarian leader and spiritual teacher, Sri Mata Amritanandamayi is the guiding light of Amrita Vishwa Vidyapeetham. Amma’s concept of education, stress on research and commitment to instilling universal values have come together to shape Amrita Vishwa Vidyapeetham into an institution where the latest advancements and discoveries combine with compassion and service-mindedness. As Mata Amritanandamayi said in 2010 when the State University of New York honored her with an honorary Doctorate in Humane Letters: “It is Amma’s prayer that we develop the expansive-mindedness to embrace both scientific knowledge and spiritual wisdom. We can no longer afford to see these two streams of knowledge as flowing in opposite directions. In truth, they complement one another. If we merge these streams, we will find that we are able to create a mighty river—a river whose waters can remove suffering and spread life to all of humanity';
+            document.getElementById('image').src = 'ammma.jpeg';
+            document.getElementById('image').style.display = 'block';
+        }
+
+        function showMouseDown() {
+            document.getElementById('eventMessage').textContent = 'Chennai, the capital city of Tamil Nadu, effortlessly combines the charm of tradition with the vibrancy of modernity. It serves as a captivating fusion of rich heritage, artistic expression, technological advancements, industrial growth, educational prowess, and overall development, establishing itself as one of India’s foremost metropolitan cities.';
+            document.getElementById('image').src = 'chennai.jpeg';
+            document.getElementById('image').style.display = 'block';
+        }
+
+        function showClick() {
+            document.getElementById('eventMessage').textContent = 'The School of Computing at the Chennai Campus aims to attract the best engineering aspirants and research scholars across the country. Currently the School offers undergraduate program, Bachelor of Technology (B. Tech.) in Computer Science and Engineering, Computer Science and Engineering (Artificial Intelligence) and Computer Science and Engineering (Cyber Security). Experienced and highly qualified faculties facilitate the students to achieve a high level knowledge and skills on recent trends in computing.';
+            document.getElementById('image').src = 'soc.png';
+            document.getElementById('image').style.display = 'block';
+        }
+
+        function showDoubleClick() {
+            document.getElementById('eventMessage').textContent = 'Cybernation is a tech fest and envisions providing a platform for faculty members, research scholars, students, and industry experts who are passionate about cybersecurity to unite and share their innovative ideas while learning about how technology can be integrated with myriad other fields. It is intended to provide collaboration initiatives among universities and industries. Amrita CyberNation will be a platform for initiating discussions on challenging aspects of Cyber Security for our Nation. Students will also get an opportunity to interact and participate in many challenges in Cyber Domain where participants are from throughout the nation.';
+            document.getElementById('image').src = 'acn.jpg';
+            document.getElementById('image').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

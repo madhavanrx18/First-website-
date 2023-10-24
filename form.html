@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+    <link rel="stylesheet" href="mainstyle.css">
+</head>
+<body id="form">
+    <nav>
+        <label class="logo">Amrita Cybernation</label>
+        <ul>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="calc.html">Calculator</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="form.html">Register</a></li>
+        </ul>
+    </nav><br><br>
+    <div class="container">
+        <h2 style="font-size: 2rem;">Registration</h2>
+        <div class="form-group">
+            <label class="label" for="name">Name :</label>
+            <input class="input" type="text" id="name">
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="email">Email :</label>
+            <input class="input" type="email" id="email">
+        </div>
+
+        <div class="form-group">
+            <label class="label">Are you from Chennai campus ?</label>
+            <input type="radio" style="cursor: pointer;" id="stude-yes" class="radio-input">
+            <label for="stude-yes" class="radio-label">Yes</label>
+            <input type="radio" style="cursor: pointer;" id="stude-no" class="radio-input">
+            <label for="stude-no" class="radio-label">No</label>
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="dept">Department :</label>
+            <select id="dept" class="select">
+                <option value="cse">CSE</option>
+                <option value="cys">CYS</option>
+                <option value="ece">ECE</option>
+                <option value="ai">AI</option>
+                <option value="mech">MECH</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="number">Contact number :</label>
+            <input class="input" type="tel" id="number">
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="cgpa">Current CGPA :</label>
+            <input class="input" type="number" step="0.01" min="1.00" max="10.00" id="cgpa">
+        </div>
+
+        <div class="form-group">
+            <label class="label">Fee Slab :</label>
+            <input type="radio" style="cursor: pointer;" id="slab1" class="radio-input">
+            <label for="slab1" class="radio-label">1</label>
+            <input type="radio" style="cursor: pointer;" id="slab2" class="radio-input">
+            <label for="slab2" class="radio-label">2</label>
+            <input type="radio" style="cursor: pointer;" id="slab3" class="radio-input">
+            <label for="slab3" class="radio-label">3</label>
+            <input type="radio" style="cursor: pointer;" id="slab4" class="radio-input">
+            <label for="slab4" class="radio-label">4</label>
+            <input type="radio" style="cursor: pointer;" id="slab5" class="radio-input">
+            <label for="slab5" class="radio-label">5</label>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <label class="label">Languages you speak :</label><br>
+            <input type="checkbox" style="cursor: pointer;" id="lang1" class="checkbox-input">
+            <label for="lang1" class="checkbox-label">Tamil</label>
+            <input type="checkbox" id="lang2" style="cursor: pointer;" class="checkbox-input">
+            <label for="lang2" class="checkbox-label">Telugu</label>
+            <input type="checkbox" id="lang3" style="cursor: pointer;" class="checkbox-input">
+            <label for="lang4" class="checkbox-label">Hindi</label>
+            <input type="checkbox" id="lang4" style="cursor: pointer;" class="checkbox-input">
+            <label for="lang5" class="checkbox-label">Malayalam</label>
+            <input type="checkbox" id="lang5" style="cursor: pointer;" class="checkbox-input">
+            <label for="lang6" class="checkbox-label">Kannada</label>
+            <input type="checkbox" id="lang6" style="cursor: pointer;" class="checkbox-input">
+            <label for="lang7" class="checkbox-label">Others</label>
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="stay">Method of stay :</label>
+            <select id="stay" class="select">
+                <option selected value="hos">Hostel</option>
+                <option value="ds">College Bus</option>
+                <option value="other">Others</option>
+            </select>
+        </div>
+        <button class="submit-btn" onclick="displayMessage()">Submit</button>
+    </div>
+    <script>
+         function displayMessage() {
+            // Check if all input fields are not empty
+            var inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"]');
+            var isChecked = false;
+
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value.trim() === '') {
+                    alert('Please fill in all the required fields.');
+                    return;
+                }
+            }
+
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var j = 0; j < checkboxes.length; j++) {
+                if (checkboxes[j].checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+
+            if (!isChecked) {
+                alert('Please select at least one language.');
+            } else {
+                alert('Registration Successful');
+            }
+        }
+    
+    </script>
+</body>
+</html>
